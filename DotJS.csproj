@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>DotJS</PackageId>
+    <Version>8.0.0-rc.1-alpha</Version>
+    <Authors>Matthew Teague</Authors>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>Browser c#/js interop</Description>
+    <PackageTags>Devmachinist, Vibe, Constellations, Messaging, DotJS, Js interop,</PackageTags>
+    <RepositoryUrl>https://github.com/devmachinist/DotJS</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Constellations" Version="8.0.0-rc.4-alpha" />
+  </ItemGroup>
+
+</Project>
