@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>DotJS</PackageId>
-    <Version>8.0.0-rc.1-alpha</Version>
+    <Version>8.0.0-rc.2-alpha</Version>
     <Authors>Matthew Teague</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>Browser c#/js interop</Description>

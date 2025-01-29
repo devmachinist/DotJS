@@ -22,6 +22,7 @@ namespace DotJS
             _constellation = constellation;
             _constellation.SetUserKey(id, key);
             _constellation.NewMessage += invocationHandler;
+            _constellation.ConnectionClosed += _constellation_ConnectionClosed;
 
             var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ??
                               Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ??
@@ -32,6 +33,15 @@ namespace DotJS
                                                constellation.Listener.Port,
                                                key,
                                                (environment != "Production")?"localhost": Dns.GetHostName());
+        }
+
+        private void _constellation_ConnectionClosed(NamedClient namedClient)
+        {
+            if(namedClient.EncryptionId == Id)
+            {
+                _constellation.NewMessage -= invocationHandler;
+                _constellation.ConnectionClosed -= _constellation_ConnectionClosed;
+            }
         }
 
         private async void invocationHandler(Constellation.Message message)

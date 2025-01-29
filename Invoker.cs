@@ -49,7 +49,7 @@ namespace DotJS
                             {
                                 if (type != null) break;
                                 var xas = assembly;
-                                if (assembly.GetName().Name.Contains("Xavier")) 
+                                if (assembly.GetName().Name.Contains("Vibe")) 
                                 {
                                     xas = Assembly.Load(xas.GetName().Name);
                                 }
@@ -125,7 +125,7 @@ namespace DotJS
 
                     if (type == null)
                     {
-                        var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name.Contains("Xavier"));
+                        var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name.Contains("Vibe"));
                                 type = type ?? assembly.GetType(className);
 
 
