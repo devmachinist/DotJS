@@ -100,9 +100,11 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        var constellation = new Constellation("MyServer");
+        var constellation = new Constellation("MyServer").AllowOrigins("yoursite.com").Run();
 
         var jsInterop = new JS("session-123", constellation, "secure-key");
+
+        
 
         // Inject the script
         Console.WriteLine("Inject this script into your browser:");

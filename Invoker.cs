@@ -36,7 +36,7 @@ namespace DotJS
 
                     string className = methodParts[0];
                     string[] methodChain = methodParts.Skip(1).ToArray();
-                    var baseAssembly = Assembly.GetEntryAssembly();
+                    var baseAssembly = Assembly.GetExecutingAssembly();
 
                     // Get the type by searching all loaded assemblies
                     Type? type = baseAssembly.GetType(className);
@@ -118,15 +118,34 @@ namespace DotJS
                     }
                     string className = string.Join(".",methodParts.Take(methodParts.Length - 1));
                     string[] methodChain = methodParts.Skip(methodParts.Length - 1).ToArray();
-                    var baseAssembly = Assembly.GetEntryAssembly();
+                    var baseAssembly = Assembly.GetExecutingAssembly();
 
                     // Get the type by searching all loaded assemblies
                     Type? type = baseAssembly.GetType(className);
 
                     if (type == null)
                     {
-                        var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name.Contains("Vibe"));
-                                type = type ?? assembly.GetType(className);
+                        foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                        {
+                            try
+                            {
+                                if (type != null) break;
+                                var xas = assembly;
+                                if (assembly.GetName().Name.Contains("Vibe")) 
+                                {
+                                    xas = Assembly.Load(xas.GetName().Name);
+                                }
+
+                                type = type ?? xas.GetType(className);
+
+                            }
+                            catch (ReflectionTypeLoadException ex)
+                            {
+                            }
+                            catch (FileNotFoundException ex)
+                            {
+                            }
+                        }
 
 
                         if(type == null) throw new InvalidOperationException($"Type '{className}' not found in any loaded assemblies.");
